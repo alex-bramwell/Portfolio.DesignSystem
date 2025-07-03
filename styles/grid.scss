@@ -1,13 +1,17 @@
-// Breakpoints
+// ===============================
+// GRID SYSTEM 
+// ===============================
+
+// 1. Define breakpoints for responsive design (like Bootstrap)
 $grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px
+  xs: 0,        // Extra small devices (phones)
+  sm: 576px,    // Small devices (landscape phones)
+  md: 768px,    // Medium devices (tablets)
+  lg: 992px,    // Large devices (desktops)
+  xl: 1200px    // Extra large devices (large desktops)
 );
 
-// Container max-widths
+// 2. Set max-widths for containers at each breakpoint
 $container-max-widths: (
   sm: 540px,
   md: 720px,
@@ -15,10 +19,10 @@ $container-max-widths: (
   xl: 1140px
 );
 
-// Grid columns
+// 3. Set the number of columns in the grid (12 is standard)
 $grid-columns: 12;
 
-// Mixin for media queries
+// 4. Mixin for media queries (responsive styles easy to apply)
 @mixin media-breakpoint-up($breakpoint) {
   @if map-has-key($grid-breakpoints, $breakpoint) {
     @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
@@ -27,7 +31,7 @@ $grid-columns: 12;
   }
 }
 
-// Container
+// 5. Container class: centers content and sets max-widths
 .grid-container {
   width: 100%;
   margin-right: auto;
@@ -35,19 +39,19 @@ $grid-columns: 12;
   padding-right: 1rem;
   padding-left: 1rem;
 
+  // Set max-width for each breakpoint
   @each $breakpoint, $container-max in $container-max-widths {
     @include media-breakpoint-up($breakpoint) {
       max-width: $container-max;
     }
   }
 
-  // Example container query for future use
+  // Example: container queries (advanced, for future use)
   @container style(--container-type: inline-size) {
-    // You can add container query styles here
   }
 }
 
-// Row
+// 6. Row class: creates a flex row for columns
 .grid-row {
   display: flex;
   flex-wrap: wrap;
@@ -55,7 +59,8 @@ $grid-columns: 12;
   margin-left: -1rem;
 }
 
-// Columns
+// 7. Column classes: .grid-col-1 to .grid-col-12
+//    These set the width of your columns (e.g., .grid-col-6 is half width)
 @for $i from 1 through $grid-columns {
   .grid-col-#{$i} {
     flex: 0 0 percentage($i / $grid-columns);
@@ -65,7 +70,8 @@ $grid-columns: 12;
   }
 }
 
-// Responsive columns
+// 8. Responsive columns: .grid-col-md-6, etc.
+//    These change column width at different screen sizes
 @each $breakpoint, $breakpoint-value in $grid-breakpoints {
   @include media-breakpoint-up($breakpoint) {
     @for $i from 1 through $grid-columns {
@@ -77,7 +83,8 @@ $grid-columns: 12;
   }
 }
 
-// Example container query usage for columns
+// 9. Example: Container query for columns (advanced, optional)
+//    This lets columns respond to the size of their parent container
 @container (min-width: 600px) {
   .grid-col-cq-6 {
     flex: 0 0 50%;
