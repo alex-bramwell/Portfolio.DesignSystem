@@ -1,104 +1,71 @@
 # My Portfolio
 
 This is a simple portfolio website built with [Next.js](https://nextjs.org/), [SCSS](https://sass-lang.com/), and [Storybook](https://storybook.js.org/) for component development.  
-It is automatically deployed to GitHub Pages from the `main` branch.
+It is automatically deployed to GitHub Pages every time you push your code to GitHub.
 
 ---
 
-## Features
+## How This Project Works
 
-- ⚡ **Next.js** for fast, modern web development
-- 🎨 **SCSS** for flexible, maintainable styling
-- 🧩 **Storybook** for isolated UI component development (local only)
-- 🚀 **Continuous Deployment** to GitHub Pages via GitHub Actions
+### 1. Local Development
 
----
+- **Develop your website locally:**  
+  Run `npm run dev` to start a local server.  
+  Open [http://localhost:3000](http://localhost:3000) in your browser to see your site as you build it.
 
-## Getting Started
+- **Develop UI components with Storybook:**  
+  Run `npm run storybook` to open Storybook at [http://localhost:6006](http://localhost:6006).  
+  Storybook lets you build and test components in isolation, making it easier to design and debug your UI.
 
-### 1. Install Dependencies
+### 2. How Deployment Works
 
-```bash
-npm install
-```
+- **Automatic Deployment:**  
+  Every time you push changes to the `main` branch on GitHub, a GitHub Actions workflow runs:
+  1. It checks out your code and installs dependencies.
+  2. It builds your site into static files (in the `out` folder).
+  3. It pushes those static files to a special branch called `gh-pages`.
+  4. GitHub Pages serves your website from the `gh-pages` branch, making it available to everyone online.
 
-### 2. Run the Development Server
+- **You do not need to manually upload files or run extra commands to deploy.**  
+  Just push your code to GitHub, and your site will update automatically!
 
-```bash
-npm run dev
-```
+### 3. How to Set Up GitHub Pages
 
-Open [http://localhost:3000](http://localhost:3000) to view your site.
-
----
-
-## Storybook: Local Component Development
-
-**Storybook** lets you develop and test UI components in isolation.
-
-- **Start Storybook locally:**
-  ```bash
-  npm run storybook
-  ```
-- Open [http://localhost:6006](http://localhost:6006) to view Storybook.
-
-**Note:**  
-Storybook is for local development only and is **not** deployed to GitHub Pages.
-
----
-
-## Deployment Guide: GitHub Pages
-
-This project uses GitHub Actions to automatically deploy your site to GitHub Pages every time you push to the `main` branch.
-
-### How Deployment Works
-
-1. **Builds the static Next.js site** into the `out` folder using `npm run build`.
-2. **Publishes the contents of `out`** to the `gh-pages` branch.
-3. **GitHub Pages serves your site** from the `gh-pages` branch.
-
-### Initial Setup Steps
-
-1. **Set your `homepage` in `package.json`:**
+1. **Set the homepage URL in `package.json`:**
 
    ```json
    "homepage": "https://<your-username>.github.io/<your-repo-name>"
    ```
 
-2. **Push your code to the `main` branch on GitHub.**
+2. **Push your code to GitHub.**
 
-3. **GitHub Actions will build and deploy your site automatically.**
-
-4. **Configure GitHub Pages:**
-
+3. **Configure GitHub Pages:**
    - Go to your repository’s **Settings** > **Pages**
-   - Source: Deploy from branch
-   - Branch: `gh-pages`
-   - Folder: `/ (root)`
+   - Set the source to **Deploy from branch**
+   - Choose the `gh-pages` branch and the `/ (root)` folder
 
-5. **Wait a minute or two, then visit:**
-
+4. **Wait a minute or two, then visit:**
    ```
    https://<your-username>.github.io/<your-repo-name>
    ```
+   Your site will be live!
 
 ---
 
-### Manual Deployment (optional)
+## Manual Deployment (Optional)
 
-You can also deploy manually from your local machine:
+If you want to deploy from your computer (not recommended if you use GitHub Actions):
 
 ```bash
 npm run build
 npm run deploy
 ```
-
-- `npm run build` generates the static site in the `out` directory.
-- `npm run deploy` publishes the `out` directory to the `gh-pages` branch.
+- `npm run build` creates the static site in the `out` folder.
+- `npm run deploy` uploads the `out` folder to the `gh-pages` branch.
 
 ---
 
-## Summary: Local vs. GitHub Pages
+## What’s the Difference?
 
 | Task                | Command                | Where to View                |
 |---------------------|------------------------|------------------------------|
@@ -106,8 +73,8 @@ npm run deploy
 | Develop components  | `npm run storybook`    | http://localhost:6006        |
 | View deployed site  | *(auto on push)*       | https://<your-username>.github.io/<your-repo-name> |
 
-- **Storybook** is for local component development only.
-- **GitHub Pages** hosts your built site for the world to see.
+- **Storybook** is for local development only (not published online).
+- **GitHub Pages** is where your live site is hosted for everyone to see.
 
 ---
 
@@ -115,15 +82,15 @@ npm run deploy
 
 ```
 my-portfolio/
-  .github/workflows/deploy.yml
-  .storybook/
-  components/
-  pages/
-  styles/
-  public/
-  package.json
-  README.md
-  next.config.js
+  .github/workflows/deploy.yml   # GitHub Actions workflow for deployment
+  .storybook/                    # Storybook configuration
+  components/                    # Reusable UI components
+  pages/                         # Next.js pages (routes)
+  styles/                        # SCSS stylesheets
+  public/                        # Static assets (images, etc.)
+  package.json                   # Project configuration and scripts
+  README.md                      # This file
+  next.config.js                 # Next.js configuration
 ```
 
 ---
