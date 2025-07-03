@@ -1,0 +1,86 @@
+// Breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+// Container max-widths
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+);
+
+// Grid columns
+$grid-columns: 12;
+
+// Mixin for media queries
+@mixin media-breakpoint-up($breakpoint) {
+  @if map-has-key($grid-breakpoints, $breakpoint) {
+    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
+// Container
+.grid-container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+
+  @each $breakpoint, $container-max in $container-max-widths {
+    @include media-breakpoint-up($breakpoint) {
+      max-width: $container-max;
+    }
+  }
+
+  // Example container query for future use
+  @container style(--container-type: inline-size) {
+    // You can add container query styles here
+  }
+}
+
+// Row
+.grid-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -1rem;
+  margin-left: -1rem;
+}
+
+// Columns
+@for $i from 1 through $grid-columns {
+  .grid-col-#{$i} {
+    flex: 0 0 percentage($i / $grid-columns);
+    max-width: percentage($i / $grid-columns);
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+// Responsive columns
+@each $breakpoint, $breakpoint-value in $grid-breakpoints {
+  @include media-breakpoint-up($breakpoint) {
+    @for $i from 1 through $grid-columns {
+      .grid-col-#{$breakpoint}-#{$i} {
+        flex: 0 0 percentage($i / $grid-columns);
+        max-width: percentage($i / $grid-columns);
+      }
+    }
+  }
+}
+
+// Example container query usage for columns
+@container (min-width: 600px) {
+  .grid-col-cq-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
