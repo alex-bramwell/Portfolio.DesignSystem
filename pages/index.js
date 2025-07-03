@@ -1,4 +1,5 @@
 import Button from '../components/Button';
+import ToggleThemeButton from '../components/ToggleThemeButton';
 
 export default function Home() {
   return (
@@ -9,6 +10,9 @@ export default function Home() {
         </div>
         <div className="grid-col-12 grid-col-md-4">
           <Button>Click Me</Button>
+        </div>
+        <div className="grid-col-12" style={{ marginTop: '2rem' }}>
+          <ToggleThemeButton />
         </div>
       </div>
     </div>

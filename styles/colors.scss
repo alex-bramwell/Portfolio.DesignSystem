@@ -1,0 +1,55 @@
+// ===============================
+// COLOR SCHEME: Neon Pink Gradient
+// ===============================
+
+// 1. Define base colors for light and dark mode
+$neon-pink: #ff4ecd;
+$neon-purple: #7c3aed;
+$neon-orange: #ffb86c;
+$background-light: #f5f7fa;
+$background-dark: #181825;
+$text-light: #222;
+$text-dark: #f5f7fa;
+
+// 2. Gradient variables
+$gradient-neon: linear-gradient(90deg, $neon-pink 0%, $neon-purple 50%, $neon-orange 100%);
+
+// 3. CSS custom properties for easy use in components
+:root {
+  --color-bg: #{$background-light};
+  --color-text: #{$text-light};
+  --color-primary: #{$neon-pink};
+  --color-secondary: #{$neon-purple};
+  --color-accent: #{$neon-orange};
+  --gradient-neon: #{$gradient-neon};
+}
+
+[data-theme="dark"] {
+  --color-bg: #{$background-dark};
+  --color-text: #{$text-dark};
+  --color-primary: #{$neon-pink};
+  --color-secondary: #{$neon-purple};
+  --color-accent: #{$neon-orange};
+  --gradient-neon: #{$gradient-neon};
+}
+
+// 4. Example utility classes (optional)
+.bg-gradient-neon {
+  background: var(--gradient-neon);
+}
+
+.text-neon {
+  color: var(--color-primary);
+}
+
+.bg-primary {
+  background: var(--color-primary);
+}
+
+.bg-secondary {
+  background: var(--color-secondary);
+}
+
+.bg-accent {
+  background: var(--color-accent);
+}

@@ -2,6 +2,9 @@
 // GRID SYSTEM 
 // ===============================
 
+@use "sass:map";
+@use "sass:math";
+
 // 1. Define breakpoints for responsive design (like Bootstrap)
 $grid-breakpoints: (
   xs: 0,        // Extra small devices (phones)
@@ -24,8 +27,8 @@ $grid-columns: 12;
 
 // 4. Mixin for media queries (responsive styles easy to apply)
 @mixin media-breakpoint-up($breakpoint) {
-  @if map-has-key($grid-breakpoints, $breakpoint) {
-    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+  @if map.has-key($grid-breakpoints, $breakpoint) {
+    @media (min-width: map.get($grid-breakpoints, $breakpoint)) {
       @content;
     }
   }
@@ -63,8 +66,8 @@ $grid-columns: 12;
 //    These set the width of your columns (e.g., .grid-col-6 is half width)
 @for $i from 1 through $grid-columns {
   .grid-col-#{$i} {
-    flex: 0 0 percentage($i / $grid-columns);
-    max-width: percentage($i / $grid-columns);
+    flex: 0 0 math.percentage(math.div($i, $grid-columns));
+    max-width: math.percentage(math.div($i, $grid-columns));
     padding-right: 1rem;
     padding-left: 1rem;
   }
@@ -76,8 +79,8 @@ $grid-columns: 12;
   @include media-breakpoint-up($breakpoint) {
     @for $i from 1 through $grid-columns {
       .grid-col-#{$breakpoint}-#{$i} {
-        flex: 0 0 percentage($i / $grid-columns);
-        max-width: percentage($i / $grid-columns);
+        flex: 0 0 math.percentage(math.div($i, $grid-columns));
+        max-width: math.percentage(math.div($i, $grid-columns));
       }
     }
   }
